@@ -109,6 +109,31 @@ df_pop_l %>%
   ggtitle('Health, Social and Demographic Profile of Victoria Point: General Population') +
   scale_x_discrete(labels = wrap_format(10))
 
+df_pop_l %>%
+  group_by( Category) %>%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c('lower_whisker','lower_hinge','median','upper_hinge','upper_whisker') ) ), sd = sd(Percent)   ) %>%
+  unnest_wider( boxplot ) %>%
+  write_csv('output/pop.csv')
+df_dis_l %>%
+  group_by( Category) %>%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c('lower_whisker','lower_hinge','median','upper_hinge','upper_whisker') ) ), sd = sd(Percent)   ) %>%
+  unnest_wider( boxplot ) %>%
+  write_csv('output/dis.csv')
+df_cald_l %>%
+  group_by( Category) %>%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c('lower_whisker','lower_hinge','median','upper_hinge','upper_whisker') ) ), sd = sd(Percent)   ) %>%
+  unnest_wider( boxplot ) %>%
+  write_csv('output/cald.csv')
+df_atsi_l %>%
+  group_by( Category) %>%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c('lower_whisker','lower_hinge','median','upper_hinge','upper_whisker') ) ), sd = sd(Percent)   ) %>%
+  unnest_wider( boxplot ) %>%
+  write_csv('output/atsi.csv')
+
 
 
 
