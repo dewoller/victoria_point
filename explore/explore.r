@@ -1,43 +1,31 @@
----
-title: "Home"
-site: workflowr::wflow_site
-output:
-  workflowr::wflow_html:
-    toc: false
-editor_options:
-  chunk_output_type: console
----
-
-
-```{r, fig.width = 10}
-
 source('_drake.R')
 
 
 read_excel('data/Legend.xlsx') %>%
   janitor::clean_names() %>%
-  mutate( summary=make_clean_names( summary )) %>%
+  mutate( summary=make_clean_names( summary )) %>% 
   rename(Category=title) %>%
   { . } -> df_legend
 
 sa3_target = 'Cleveland - Stradbroke'
 sa2_target = 'Victoria Point'
 
+sa3_name16
 
 read_excel('data/ARCMAP_ATSI.xlsx') %>%
-  janitor::clean_names() %>%
+  janitor::clean_names() %>% 
   { . } -> df_atsi
 
 read_excel('data/ArcMap_CALDTbl.xlsx') %>%
-  janitor::clean_names() %>%
+  janitor::clean_names() %>% 
   { . } -> df_cald
 
 read_excel('data/ArcMap_DisData.xlsx') %>%
-  janitor::clean_names() %>%
+  janitor::clean_names() %>% 
   { . } -> df_dis
 
 read_excel('data/ArcMap_GP Data.xlsx') %>%
-  janitor::clean_names() %>%
+  janitor::clean_names() %>% 
   { . } -> df_pop
 
 blue =  RColorBrewer::brewer.pal(9, 'PuBu')[8]
@@ -46,8 +34,8 @@ grey =  RColorBrewer::brewer.pal(9, 'Greys')[6]
 
 df_atsi %>%
   select( sa2_name16, sa3_name16, df_legend %>%
-         filter( summary %in% names(df_atsi) ) %>%
-         pluck('summary')) %>%
+         filter( summary %in% names(df_atsi) ) %>% 
+         pluck('summary')) %>% 
 pivot_longer( -starts_with('sa'), names_to='summary', values_to='Percent') %>%
 inner_join( df_legend, by='summary') %>%
 { . } -> df_atsi_l
@@ -62,8 +50,8 @@ df_atsi_l %>%
 
 df_cald %>%
   select( sa2_name16, sa3_name16, df_legend %>%
-         filter( summary %in% names(df_cald) ) %>%
-         pluck('summary')) %>%
+         filter( summary %in% names(df_cald) ) %>% 
+         pluck('summary')) %>% 
 pivot_longer( -starts_with('sa'), names_to='summary', values_to='Percent') %>%
 inner_join( df_legend, by='summary') %>%
 { . } -> df_cald_l
@@ -78,8 +66,8 @@ df_cald_l %>%
 
 df_dis %>%
   select( sa2_name16, sa3_name16, df_legend %>%
-         filter( summary %in% names(df_dis) ) %>%
-         pluck('summary')) %>%
+         filter( summary %in% names(df_dis) ) %>% 
+         pluck('summary')) %>% 
 pivot_longer( -starts_with('sa'), names_to='summary', values_to='Percent') %>%
 inner_join( df_legend, by='summary') %>%
 { . } -> df_dis_l
@@ -94,8 +82,8 @@ df_dis_l %>%
 
 df_pop %>%
   select( sa2_name16, sa3_name16, df_legend %>%
-         filter( summary %in% names(df_pop) ) %>%
-         pluck('summary')) %>%
+         filter( summary %in% names(df_pop) ) %>% 
+         pluck('summary')) %>% 
           pivot_longer( -starts_with('sa'), names_to='summary', values_to='Percent') %>%
           inner_join( df_legend, by='summary') %>%
   { . } -> df_pop_l
@@ -109,8 +97,27 @@ df_pop_l %>%
   scale_x_discrete(labels = wrap_format(15))
 
 
+ 
 
 
 
-```
+df_cald %>%
+  select( sa2_name16, sa3_name16, df_legend %>%
+         filter( summary %in% names(df_cald) ) %>% 
+         pluck('summary')) %>% 
+  { . } -> df_cald
+
+df_dis %>%
+  select( sa2_name16, sa3_name16, df_legend %>%
+         filter( summary %in% names(df_dis) ) %>% 
+         pluck('summary')) %>% 
+  { . } -> df_dis
+
+
+
+df_atsi %>%
+  select( sa2_name16, sa3_name16, df_legend %>%
+         filter( summary %in% names(df_atsi) ) %>% 
+         pluck('summary')) %>% 
+  { . } -> df_atsi
 
