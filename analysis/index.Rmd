@@ -107,7 +107,7 @@ df_pop_l %>%
   geom_jitter( aes(Category, Percent), data= df_pop_l %>% filter(sa2_name16==sa2_target), color = red) +
   theme_bw() +
   ggtitle('Health, Social and Demographic Profile of Victoria Point: General Population') +
-  scale_x_discrete(labels = wrap_format(15))
+  scale_x_discrete(labels = wrap_format(10))
 
 
 
