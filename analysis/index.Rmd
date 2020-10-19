@@ -40,6 +40,7 @@ read_excel('data/ArcMap_GP Data.xlsx') %>%
   janitor::clean_names() %>%
   { . } -> df_pop
 
+
 blue =  RColorBrewer::brewer.pal(9, 'PuBu')[8]
 red =  RColorBrewer::brewer.pal(9, 'OrRd')[8]
 grey =  RColorBrewer::brewer.pal(9, 'Greys')[6]
