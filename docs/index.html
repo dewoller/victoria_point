@@ -325,7 +325,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-10-19
+<strong>Last updated:</strong> 2020-10-20
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -416,16 +416,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollervictoriapointtree7ae2b9735e217d44978a9f57864fc59e84d5a54ctargetblank7ae2b97a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/victoria_point/tree/7ae2b9735e217d44978a9f57864fc59e84d5a54c" target="_blank">7ae2b97</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomdewollervictoriapointtree8b8a2d2a9b1a6f76a95b0cc1f97fb54e868c9ed3targetblank8b8a2d2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/dewoller/victoria_point/tree/8b8a2d2a9b1a6f76a95b0cc1f97fb54e868c9ed3" target="_blank">8b8a2d2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollervictoriapointtree7ae2b9735e217d44978a9f57864fc59e84d5a54ctargetblank7ae2b97a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomdewollervictoriapointtree8b8a2d2a9b1a6f76a95b0cc1f97fb54e868c9ed3targetblank8b8a2d2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/dewoller/victoria_point/tree/7ae2b9735e217d44978a9f57864fc59e84d5a54c" target="_blank">7ae2b97</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/dewoller/victoria_point/tree/8b8a2d2a9b1a6f76a95b0cc1f97fb54e868c9ed3" target="_blank">8b8a2d2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -433,6 +433,12 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .drake/
+
+Untracked files:
+    Untracked:  output/atsi.csv
+    Untracked:  output/cald.csv
+    Untracked:  output/dis.csv
+    Untracked:  output/pop.csv
 
 </code></pre>
 <p>
@@ -471,6 +477,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/dewoller/victoria_point/blob/8b8a2d2a9b1a6f76a95b0cc1f97fb54e868c9ed3/analysis/index.Rmd" target="_blank">8b8a2d2</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-10-20
+</td>
+<td>
+workflowr::wflow_publish(“analysis/index.Rmd”)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/dewoller/victoria_point/8a2b8cb1a047adcaa8a7f4cba20d2d62910ba640/docs/index.html" target="_blank">8a2b8cb</a>
+</td>
+<td>
+Dennis Wollersheim
+</td>
+<td>
+2020-10-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -910,6 +950,34 @@ Dennis Wollersheim
 </table>
 </div>
 </div>
+<pre class="r"><code>df_pop_l %&gt;%
+  group_by( Category) %&gt;%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c(&#39;lower_whisker&#39;,&#39;lower_hinge&#39;,&#39;median&#39;,&#39;upper_hinge&#39;,&#39;upper_whisker&#39;) ) ), sd = sd(Percent)   ) %&gt;%
+  unnest_wider( boxplot ) %&gt;%
+  write_csv(&#39;output/pop.csv&#39;)</code></pre>
+<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>df_dis_l %&gt;%
+  group_by( Category) %&gt;%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c(&#39;lower_whisker&#39;,&#39;lower_hinge&#39;,&#39;median&#39;,&#39;upper_hinge&#39;,&#39;upper_whisker&#39;) ) ), sd = sd(Percent)   ) %&gt;%
+  unnest_wider( boxplot ) %&gt;%
+  write_csv(&#39;output/dis.csv&#39;)</code></pre>
+<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>df_cald_l %&gt;%
+  group_by( Category) %&gt;%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c(&#39;lower_whisker&#39;,&#39;lower_hinge&#39;,&#39;median&#39;,&#39;upper_hinge&#39;,&#39;upper_whisker&#39;) ) ), sd = sd(Percent)   ) %&gt;%
+  unnest_wider( boxplot ) %&gt;%
+  write_csv(&#39;output/cald.csv&#39;)</code></pre>
+<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>df_atsi_l %&gt;%
+  group_by( Category) %&gt;%
+  summarise(boxplot= list( setNames(boxplot.stats(Percent)$stats,
+                                    c(&#39;lower_whisker&#39;,&#39;lower_hinge&#39;,&#39;median&#39;,&#39;upper_hinge&#39;,&#39;upper_whisker&#39;) ) ), sd = sd(Percent)   ) %&gt;%
+  unnest_wider( boxplot ) %&gt;%
+  write_csv(&#39;output/atsi.csv&#39;)</code></pre>
+<pre><code>`summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
